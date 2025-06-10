@@ -30,14 +30,7 @@ function extractMeetingInfo() {
   const url = window.location.href;
   const meetingIdMatch = url.match(/meet\.google\.com\/([a-z0-9-]+)/i);
   meetingId = meetingIdMatch ? meetingIdMatch[1] : generateUUID();
-  
-  // Try to extract meeting title from page
-  setTimeout(() => {
-    const titleElement = document.querySelector('[data-meeting-title]') || 
-                        document.querySelector('div[jsname="Ypafjf"]') ||
-                        document.querySelector('span[data-is-tooltip-wrapper="true"]');
-    meetingTitle = titleElement ? titleElement.textContent : 'Google Meet Session';
-  }, 2000);
+  meetingTitle = meetingIdMatch[1];
 }
 
 function generateUUID() {
@@ -156,6 +149,7 @@ function createButton(id, text, color, iconSvg) {
   
   // Add icon
   const iconWrapper = document.createElement('span');
+  iconWrapper.classList.add('icon-wrapper');
   iconWrapper.innerHTML = iconSvg;
   iconWrapper.style.cssText = `
     display: flex;
@@ -168,6 +162,7 @@ function createButton(id, text, color, iconSvg) {
   
   // Add text
   const textSpan = document.createElement('span');
+  textSpan.classList.add('button-text');
   textSpan.textContent = text;
   
   // Add ripple effect container
@@ -185,6 +180,9 @@ function createButton(id, text, color, iconSvg) {
   btn.appendChild(rippleContainer);
   btn.appendChild(iconWrapper);
   btn.appendChild(textSpan);
+
+  btn._iconWrapper = iconWrapper;
+  btn._textSpan = textSpan;
   
   // Hover effects
   btn.onmouseover = () => {
@@ -476,7 +474,8 @@ function togglePause() {
 
 function pauseRecording() {
   isPaused = true;
-  document.getElementById('pause-btn').textContent = 'Resume';
+  const pauseBtn = document.getElementById('pause-btn');
+  pauseBtn._textSpan.textContent = 'Resume';
   
   // Stop recognition
   if (recognition) {
@@ -487,8 +486,8 @@ function pauseRecording() {
 }
 
 function resumeRecording() {
-  isPaused = false;
-  document.getElementById('pause-btn').textContent = 'Pause';
+  const pauseBtn = document.getElementById('pause-btn');
+  pauseBtn._textSpan.textContent = 'Pause';
   
   // Restart recognition
   if (recognition) {
