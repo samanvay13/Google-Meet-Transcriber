@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Google Meet Transcriber",
+  "version": "1.0.1",
+  "description": "Transcribes Google Meet calls in real-time and attributes text to speakers.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "notifications",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://meet.google.com/*",
+    "https://your-api-endpoint.com/*"
+  ],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Google Meet Transcriber"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://meet.google.com/*"],
+      "js": ["content_script.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["inject_script.js"],
+      "matches": ["https://meet.google.com/*"]
+    }
+  ]
+}
+  

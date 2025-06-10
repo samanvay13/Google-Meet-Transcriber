@@ -1,0 +1,72 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Webpack output
+dist/
+build/
+*.bundle.js
+*.bundle.js.map
+.cache/
+
+# Logs and temporary files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+*.gz
+*.zip
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environmental files
+.env
+.env.local
+.env.*.local
+
+# Tests and Coverage reports
+coverage/
+jest/
+*.test.js
+*.spec.js
+
+# Chrome Extension Specific
+*.crx
+*.pem
+manifest.json.backup
+
+# Obfuscated or encrypted code
+*.obfuscated.js
+
+# Build artifacts
+build/
+output/
+*.tmp
+*.bak
+*.old
+*.lock
+
+# Dependency Cache
+.npm/
+.pnp/
+.pnp.js
+
+# IntelliJ IDEA settings
+/.idea/
+
+# OS specific
+*.swp
+*.swo
